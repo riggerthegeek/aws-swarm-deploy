@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Ansible template
+*.retry
+
+.idea
+*.tfstate*
+/ansible/hosts
+/terraform/**/*.tfvars
