@@ -1,0 +1,31 @@
+{
+  "variables": {
+    "ami_name": "docker-17.03-ce",
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "description": "Ubuntu 16.04, Docker 17.03-ce",
+    "name": "Ubuntu Docker",
+    "region": "eu-west-1",
+    "source_ami": "ami-405f7226",
+    "ssh_username": "ubuntu"
+  },
+  "provisioners": [{
+    "type": "shell",
+    "script": "{{ template_dir }}/base.sh"
+  }],
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{ user `aws_access_key` }}",
+    "secret_key": "{{ user `aws_secret_key` }}",
+    "region": "{{ user `region` }}",
+    "source_ami": "{{ user `source_ami` }}",
+    "instance_type": "t2.micro",
+    "ssh_username": "{{ user `ssh_username` }}",
+    "ami_name": "{{ user `ami_name` }}-{{ isotime \"2006-01-02\" }}",
+    "ami_description": "{{ user `description` }}",
+    "ami_groups": "all",
+    "tags": {
+      "Name": "{{ user `name` }}"
+    }
+  }]
+}
