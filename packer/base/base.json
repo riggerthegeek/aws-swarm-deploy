@@ -1,5 +1,6 @@
 {
   "variables": {
+    "ami_groups": "all",
     "ami_name": "docker-17.03-ce",
     "aws_access_key": "",
     "aws_secret_key": "",
@@ -23,7 +24,7 @@
     "ssh_username": "{{ user `ssh_username` }}",
     "ami_name": "{{ user `ami_name` }}-{{ isotime \"2006-01-02\" }}",
     "ami_description": "{{ user `description` }}",
-    "ami_groups": "all",
+    "ami_groups": "{{ user `ami_groups` }}",
     "tags": {
       "Name": "{{ user `name` }}"
     }
