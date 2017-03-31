@@ -50,17 +50,19 @@ This will destroy all the instances:
         -var access_key=<access_key> \
         -var secret_key=<secret_key>
 
-### Remote State
+### Backend
 
 Storing the remote state enables this to be shared by a team or done from a continuous integration box. **IMPORTANT:**
 this will not create the S3 bucket. This must be done manually beforehand.
 
-You can store the remote state in S3 quite easily by running the following command:
+You can store the remote state in S3 quite easily. First, define the variables in `terraform.tfvars`:
 
-    terraform remote config \
-        -backend=s3 \
-        -backend-config="bucket=<s3_bucket_name>" \
-        -backend-config="key=<s3_file_name>" \
-        -backend-config="region=<aws_region>" \
-        -backend-config="access_key=<access_key>" \
-        -backend-config="secret_key=<secret_key>"
+    bucket = "<bucket_name>"
+    key = "<bucket_path_to_file>"
+    region = "<bucket_region>"
+    access_key = "<bucket_access_key>"
+    secret_key = "<bucket_secret_key>"
+
+Once you've done that, initialize it:
+
+    terraform init -input=false -backend-config=/path/to/terraform.tfvars
