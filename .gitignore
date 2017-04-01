@@ -6,3 +6,4 @@
 *.tfstate*
 /ansible/hosts
 /terraform/**/*.tfvars
+/packer-build.out
