@@ -1,3 +1,10 @@
+"""
+Get AMI ID
+
+Opens up the Packer log and searches for 
+the region and AMI IDs. Outputs as a JSON
+object for use elsewhere
+"""
 import json
 import re
 import sys
