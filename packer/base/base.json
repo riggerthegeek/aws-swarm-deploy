@@ -22,7 +22,7 @@
     "source_ami": "{{ user `source_ami` }}",
     "instance_type": "t2.micro",
     "ssh_username": "{{ user `ssh_username` }}",
-    "ami_name": "{{ user `ami_name` }}-{{ isotime \"2006-01-02\" }}",
+    "ami_name": "{{ user `ami_name` }}-{{ isotime \"2006-01\" }}",
     "ami_description": "{{ user `description` }}",
     "ami_groups": "{{ user `ami_groups` }}",
     "tags": {
