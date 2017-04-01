@@ -7,3 +7,4 @@
 /ansible/hosts
 /terraform/**/*.tfvars
 /packer-build.out
+/packer/tmp
