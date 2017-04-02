@@ -7,7 +7,7 @@ of the image, creating a new one if it's too
 old
 """
 
-import copy
+from copy import copy
 import json
 import os
 import string
@@ -25,7 +25,7 @@ packer_json['builders'] = []
 for base_ami in string.split(base_amis, ','):
     ami_region = string.split(base_ami, '=')
 
-    new_builder = copy.copy(builder)
+    new_builder = copy(builder)
 
     new_builder['region'] = ami_region[0]
     new_builder['source_ami'] = ami_region[1]
