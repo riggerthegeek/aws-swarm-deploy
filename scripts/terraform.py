@@ -4,13 +4,11 @@ Terraform
 Works out how many manager/worker instances
 to create and then runs the Terraform script
 """
-import json
 import os
 import sys
 from subprocess import call
 
 cwd = sys.argv[1]
-ami_list = json.loads(sys.argv[2])
 
 config = {
     'manager_instances': int(os.environ['TERRAFORM_MANAGER_INSTANCES'] or '0'),
