@@ -8,9 +8,7 @@
 variable "access_key" {}
 variable "secret_key" {}
 
-variable "ami" {
-  default = "ami-87b08fe1"
-}
+variable "ami" {}
 
 variable "availability_zone" {
   default = "b"
