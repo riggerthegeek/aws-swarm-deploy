@@ -3,8 +3,9 @@
 *.retry
 
 .idea
-*.tfstate*
+.terraform
 /ansible/hosts
 /terraform/**/*.tfvars
+/terraform/swarm
 /packer-build.out
 /packer/tmp

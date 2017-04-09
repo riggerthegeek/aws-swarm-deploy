@@ -6,8 +6,8 @@
     "aws_secret_key": "",
     "description": "Ubuntu 16.04, Docker 17.03-ce",
     "name": "Ubuntu Docker",
-    "region": "eu-west-1",
-    "source_ami": "ami-405f7226",
+    "region": "",
+    "source_ami": "",
     "ssh_username": "ubuntu"
   },
   "provisioners": [{

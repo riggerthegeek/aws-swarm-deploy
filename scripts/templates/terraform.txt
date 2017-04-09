@@ -1,0 +1,30 @@
+##########################
+##########################
+###                    ###
+###   Cluster Module   ###
+###                    ###
+##########################
+##########################
+terraform {
+  required_version = ">= 0.9.0"
+  backend "s3" {}
+}
+
+module "$module_name" {
+  source = "../docker"
+
+  access_key = "$access_key"
+  secret_key = "$secret_key"
+
+  ami = "$ami"
+  availability_zone = "$availability_zone"
+  base_instance = "$base_instance"
+  key_pair = "$key_pair"
+  manager_instances = "$manager_instances"
+  #manager_instance_types = "$manager_instance_types"
+  #manager_name = "$manager_name"
+  region = "$region"
+  worker_instances = "$worker_instances"
+  #worker_instance_types = "$worker_instance_types"
+  #worker_name = "$worker_name"
+}
