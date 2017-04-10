@@ -25,18 +25,18 @@ for region in ami_list:
     output = src.substitute({
         'access_key': access_key,
         'ami': ami_list[region],
-        'availability_zone': 'b',
-        'base_instance': 't2.micro',
+        'availability_zone': os.environ['AWS_AVAILABILITY_ZONE'],
+        'base_instance': os.environ['AWS_BASE_INSTANCE'],
         'key_pair': os.environ['AWS_KEY_PAIR'],
         'manager_instances': config['manager_instances'],
         'manager_instance_types': '{}',
-        'manager_name': '',
+        'manager_name': os.environ['AWS_MANAGER_NAME'],
         'module_name': 'swarm-' + region,
         'region': region,
         'secret_key': secret_key,
         'worker_instances': config['worker_instances'],
         'worker_instance_types': '{}',
-        'worker_name': ''
+        'worker_name': os.environ['AWS_WORKER_NAME']
     })
 
     output_file = open(cwd + '/' + region + '.tf', 'w')
