@@ -93,6 +93,7 @@ fi
 TF_DIR="$PWD/terraform/swarm"
 TFVARS_FILE="$TF_DIR/terraform.tfvars"
 
+rm -rf "$TF_DIR"
 mkdir -p "$TF_DIR"
 
 rm -Rf "$TFVARS_FILE" "$TF_DIR/.terraform"
@@ -103,8 +104,15 @@ echo "region = \"$TERRAFORM_REMOTE_S3_BUCKET_REGION\"" >> "$TFVARS_FILE"
 echo "access_key = \"$TERRAFORM_ACCESS_KEY\"" >> "$TFVARS_FILE"
 echo "secret_key = \"$TERRAFORM_SECRET_KEY\"" >> "$TFVARS_FILE"
 
+# Generate the Terraform modules
+python ./scripts/generate_terraform_modules.py "$TF_DIR" "$AMI_LIST"
+
+# Initialise Terraform - can't get this to work correctly in Python script
+(cd "$TF_DIR"; terraform init -input=false -get=true -backend=true -backend-config="$TFVARS_FILE")
+errExit $?
+
 # Run the Terraform stuff
-python ./scripts/terraform.py "$TF_DIR" "$AMI_LIST" "$TFVARS_FILE"
+python ./scripts/terraform.py "$TF_DIR" "$AMI_LIST"
 errExit $?
 
 echo "Terraform step done"
