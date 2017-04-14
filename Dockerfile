@@ -21,9 +21,12 @@ WORKDIR /opt/deploy
 ADD . /opt/deploy
 
 VOLUME [ "/opt/keypair" ]
+VOLUME [ "/opt/stack" ]
 
 # Environment variables
 ENV ANSIBLE_HOST_KEY_CHECKING=False
+ENV ANSIBLE_SERVICE_NAME=
+
 ENV AWS_ACCESS_KEY=
 ENV AWS_AVAILABILITY_ZONE=b
 ENV AWS_BASE_AMI_ID="eu-west-1=ami-405f7226"

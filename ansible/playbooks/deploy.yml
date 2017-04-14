@@ -1,0 +1,9 @@
+- hosts: manager[0]
+  tasks:
+    - name: Copy docker-compose file to manager
+      copy:
+        src: /opt/stack/docker-compose.yml
+        dest: ~/docker-compose.yml
+    - name: Deploy the Docker stack
+      shell: >
+        docker stack deploy -c ~/docker-compose.yml {{ service_name | quote }}

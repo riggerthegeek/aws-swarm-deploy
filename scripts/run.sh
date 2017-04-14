@@ -140,4 +140,8 @@ errExit $?
 ansible-playbook -i "$ANSIBLE_HOSTS" ./ansible/playbooks/swarm.yml
 errExit $?
 
+# Deploy the stack
+ansible-playbook -i "$ANSIBLE_HOSTS" ./ansible/playbooks/deploy.yml --extra-vars "service_name=$ANSIBLE_SERVICE_NAME"
+errExit $?
+
 echo "Ansible step done"
