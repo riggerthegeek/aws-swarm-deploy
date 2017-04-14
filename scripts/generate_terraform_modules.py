@@ -14,6 +14,22 @@ config = {
     'worker_instances': int(os.environ['TERRAFORM_WORKER_INSTANCES'] or '0'),
 }
 
+"""
+You should never have an even number of managers
+
+@link https://docs.docker.com/engine/swarm/admin_guide/#maintain-the-quorum-of-managers
+"""
+if (config['manager_instances'] % 2) == 0:
+    raise ValueError('It\'s dangerous to have an even number of managers')
+
+"""
+You should have a maximum of 9 manager nodes
+
+@link https://docs.docker.com/engine/swarm/admin_guide/#add-manager-nodes-for-fault-tolerance
+"""
+if config['manager_instances'] > 9:
+    raise ValueError('It\'s not recommended to have more than 9 managers')
+
 # Generate the files
 for region in ami_list:
     print 'Generating region config: ' + region
@@ -29,13 +45,13 @@ for region in ami_list:
         'base_instance': os.environ['AWS_BASE_INSTANCE'],
         'key_pair': os.environ['AWS_KEY_PAIR'],
         'manager_instances': config['manager_instances'],
-        'manager_instance_types': '{}',
+        'manager_instance_types': os.environ['AWS_MANAGER_INSTANCE_TYPES'],
         'manager_name': os.environ['AWS_MANAGER_NAME'],
         'module_name': 'swarm-' + region,
         'region': region,
         'secret_key': secret_key,
         'worker_instances': config['worker_instances'],
-        'worker_instance_types': '{}',
+        'worker_instance_types': os.environ['AWS_WORKER_INSTANCE_TYPES'],
         'worker_name': os.environ['AWS_WORKER_NAME']
     })
 
