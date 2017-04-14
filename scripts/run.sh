@@ -127,4 +127,17 @@ echo "Terraform step done"
 
 echo "Setting up Docker Swarm with Ansible"
 
+# This is not immediately connectible
+sleep 30
+
+ANSIBLE_HOSTS="./ansible/hosts"
+
+# Generate the hosts file
+python ./scripts/generate_host_file.py "$ANSIBLE_HOSTS" "$AWS_KEY_PAIR" "swarm"
+errExit $?
+
+# Configure the Swarm
+ansible-playbook -i "$ANSIBLE_HOSTS" ./ansible/playbooks/swarm.yml
+errExit $?
+
 echo "Ansible step done"
