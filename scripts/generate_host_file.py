@@ -19,7 +19,7 @@ else:
     raise AttributeError('Please set an output file')
 
 if len(sys.argv) > 2:
-    key_name = sys.argv[2]
+    key_name = '/opt/keypair/' + sys.argv[2]
 else:
     raise AttributeError('Please set a key name')
 
